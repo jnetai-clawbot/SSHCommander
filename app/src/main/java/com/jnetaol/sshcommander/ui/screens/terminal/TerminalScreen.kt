@@ -175,8 +175,7 @@ fun CommandsView(
             LazyColumn(Modifier.weight(1f), contentPadding = PaddingValues(horizontal = 16.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
                 items(commands, key = { it.id }) { cmd ->
                     Card(
-                        modifier = Modifier.fillMaxWidth(),
-                        onClick = {
+                        modifier = Modifier.fillMaxWidth().clickable {
                             viewModel.executeCommand(cmd.command)
                             viewModel.saveCommand(cmd.copy(lastUsed = System.currentTimeMillis()))
                         },
