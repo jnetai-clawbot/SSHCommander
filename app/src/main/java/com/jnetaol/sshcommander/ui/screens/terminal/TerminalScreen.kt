@@ -1,6 +1,7 @@
 package com.jnetaol.sshcommander.ui.screens.terminal
 
 import androidx.compose.animation.*
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.background
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
@@ -165,7 +166,7 @@ fun CommandsView(
     Column(Modifier.fillMaxSize()) {
         Row(Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
             Text("Saved Commands", color = SCTextPrimary, fontSize = 16.sp, fontWeight = FontWeight.Bold)
-            GlowButton("Add", Icons.Default.Add, glowColor = SCPrimary) { showAddDialog = true }
+            GlowButton("Add", Icons.Default.Add, onClick = { showAddDialog = true }, glowColor = SCPrimary)
         }
 
         if (commands.isEmpty()) {
@@ -174,7 +175,8 @@ fun CommandsView(
             LazyColumn(Modifier.weight(1f), contentPadding = PaddingValues(horizontal = 16.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
                 items(commands, key = { it.id }) { cmd ->
                     Card(
-                        Modifier.fillMaxWidth().clickable {
+                        modifier = Modifier.fillMaxWidth(),
+                        onClick = {
                             viewModel.executeCommand(cmd.command)
                             viewModel.saveCommand(cmd.copy(lastUsed = System.currentTimeMillis()))
                         },
@@ -222,7 +224,7 @@ fun StatsView(viewModel: AppViewModel) {
         item {
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
                 Text("System Stats", color = SCTextPrimary, fontSize = 18.sp, fontWeight = FontWeight.Bold)
-                GlowButton("Refresh", Icons.Default.Refresh, glowColor = SCSecondary) { viewModel.fetchStats() }
+                GlowButton("Refresh", Icons.Default.Refresh, onClick = { viewModel.fetchStats() }, glowColor = SCSecondary)
             }
         }
 
@@ -262,7 +264,7 @@ fun StatsView(viewModel: AppViewModel) {
             item {
                 Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
                     Text("Docker Containers", color = SCTextPrimary, fontSize = 18.sp, fontWeight = FontWeight.Bold)
-                    GlowButton("Refresh", Icons.Default.Refresh, glowColor = SCSecondary) { viewModel.fetchDockerContainers() }
+                    GlowButton("Refresh", Icons.Default.Refresh, onClick = { viewModel.fetchDockerContainers() }, glowColor = SCSecondary)
                 }
             }
 
@@ -315,9 +317,9 @@ fun AddCommandDialog(
             }
         },
         confirmButton = {
-            GlowButton("Save", Icons.Default.Save, glowColor = SCPrimary, enabled = name.isNotBlank() && command.isNotBlank()) {
+            GlowButton("Save", Icons.Default.Save, onClick = {
                 onSave(SavedCommand(connectionId = connectionId, name = name, command = command, description = description))
-            }
+            }, glowColor = SCPrimary, enabled = name.isNotBlank() && command.isNotBlank())
         },
         dismissButton = { TextButton(onDismiss) { Text("Cancel", color = SCTextMuted) } },
         containerColor = SCSurface
