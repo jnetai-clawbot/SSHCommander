@@ -103,12 +103,13 @@ fun SettingsScreen(
                         GlowButton(
                             "Check For Updates",
                             Icons.Default.SystemUpdateAlt,
+                            onClick = {
+                                val intent = Intent(Intent.ACTION_VIEW, android.net.Uri.parse(viewModel.githubReleasesUrl))
+                                context.startActivity(intent)
+                            },
                             glowColor = SCSecondary,
                             modifier = Modifier.fillMaxWidth()
-                        ) {
-                            val intent = Intent(Intent.ACTION_VIEW, android.net.Uri.parse(viewModel.githubReleasesUrl))
-                            context.startActivity(intent)
-                        }
+                        )
                     }
                 }
             }
@@ -122,25 +123,27 @@ fun SettingsScreen(
                             GlowButton(
                                 "Share App",
                                 Icons.Default.Share,
+                                onClick = {
+                                    val sendIntent = Intent(Intent.ACTION_SEND).apply {
+                                        type = "text/plain"
+                                        putExtra(Intent.EXTRA_SUBJECT, "SSH Commander - Linux Server Manager")
+                                        putExtra(Intent.EXTRA_TEXT, viewModel.shareText)
+                                    }
+                                    context.startActivity(Intent.createChooser(sendIntent, "Share SSH Commander"))
+                                },
                                 glowColor = SCPrimary,
                                 modifier = Modifier.weight(1f)
-                            ) {
-                                val sendIntent = Intent(Intent.ACTION_SEND).apply {
-                                    type = "text/plain"
-                                    putExtra(Intent.EXTRA_SUBJECT, "SSH Commander - Linux Server Manager")
-                                    putExtra(Intent.EXTRA_TEXT, viewModel.shareText)
-                                }
-                                context.startActivity(Intent.createChooser(sendIntent, "Share SSH Commander"))
-                            }
+                            )
                             GlowButton(
                                 "Copy Link",
                                 Icons.Default.ContentCopy,
+                                onClick = {
+                                    clipboardManager.setText(AnnotatedString(viewModel.githubReleasesUrl))
+                                    viewModel.showToast("Link copied!")
+                                },
                                 glowColor = SCSecondary,
                                 modifier = Modifier.weight(1f)
-                            ) {
-                                clipboardManager.setText(AnnotatedString(viewModel.githubReleasesUrl))
-                                viewModel.showToast("Link copied!")
-                            }
+                            )
                         }
                     }
                 }

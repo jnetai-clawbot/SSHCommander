@@ -72,7 +72,7 @@ fun TerminalScreen(
             selectedTabIndex = activeTab,
             containerColor = SCSurface,
             contentColor = SCPrimary,
-            divider = { HorizontalDivider(color = SCSurfaceVariant) }
+            divider = { Divider(color = SCSurfaceVariant) }
         ) {
             tabs.forEachIndexed { index, title ->
                 Tab(
@@ -140,7 +140,7 @@ fun TerminalView(
                     onClick = {
                         if (commandInput.isNotBlank()) {
                             viewModel.executeCommand(commandInput)
-                            commandInput = ""
+                            onInputChange("")
                         }
                     },
                     Modifier.size(40.dp)
