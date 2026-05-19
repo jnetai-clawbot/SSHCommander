@@ -193,13 +193,13 @@ fun AddConnectionDialog(onDismiss: () -> Unit, onSave: (SSHConnection) -> Unit) 
             }
         },
         confirmButton = {
-            GlowButton("Save", Icons.Default.Save, glowColor = SCPrimary, enabled = name.isNotBlank() && host.isNotBlank()) {
+            GlowButton("Save", Icons.Default.Save, onClick = {
                 onSave(SSHConnection(
                     name = name.ifBlank { "$username@$host" },
                     host = host, port = port.toIntOrNull() ?: 22,
                     username = username.ifBlank { "root" }, password = password
                 ))
-            }
+            }, glowColor = SCPrimary, enabled = name.isNotBlank() && host.isNotBlank())
         },
         dismissButton = { TextButton(onDismiss) { Text("Cancel", color = SCTextMuted) } },
         containerColor = SCSurface
