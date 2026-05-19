@@ -97,20 +97,20 @@ object SSHManager {
             try {
                 val statsScript = """
                     echo "HOSTNAME:$(hostname)"
-                    CPU=$(top -bn1 | grep "Cpu(s)" | awk '{print $2}' | cut -d'%' -f1)
-                    echo "CPU:${CPU}%"
-                    MEM=$(free -m | awk 'NR==2{printf "%.1f%%", $3*100/$2}')
-                    echo "MEM:${MEM}"
-                    DISK=$(df -h / | awk 'NR==2{print $5}')
-                    echo "DISK:${DISK}"
-                    UP=$(uptime -p 2>/dev/null || uptime | awk -F'up ' '{print $2}' | awk -F',' '{print $1}')
-                    echo "UPTIME:${UP}"
-                    LA=$(uptime | awk -F'load average:' '{print $2}' | tr -d ' ')
-                    echo "LOAD:${LA}"
-                    PROCS=$(ps aux --no-headers | wc -l)
-                    echo "PROCS:${PROCS}"
-                    OS=$(cat /etc/os-release 2>/dev/null | grep PRETTY_NAME | cut -d'"' -f2 || echo "Linux")
-                    echo "OS:${OS}"
+                    CPU=${'$'}(top -bn1 | grep "Cpu(s)" | awk '{print ${'$'}2}' | cut -d'%' -f1)
+                    echo "CPU:${'$'}{CPU}%"
+                    MEM=${'$'}(free -m | awk 'NR==2{printf "%.1f%%", ${'$'}3*100/${'$'}2}')
+                    echo "MEM:${'$'}{MEM}"
+                    DISK=${'$'}(df -h / | awk 'NR==2{print ${'$'}5}')
+                    echo "DISK:${'$'}{DISK}"
+                    UP=${'$'}(uptime -p 2>/dev/null || uptime | awk -F'up ' '{print ${'$'}2}' | awk -F',' '{print ${'$'}1}')
+                    echo "UPTIME:${'$'}{UP}"
+                    LA=${'$'}(uptime | awk -F'load average:' '{print ${'$'}2}' | tr -d ' ')
+                    echo "LOAD:${'$'}{LA}"
+                    PROCS=${'$'}(ps aux --no-headers | wc -l)
+                    echo "PROCS:${'$'}{PROCS}"
+                    OS=${'$'}(cat /etc/os-release 2>/dev/null | grep PRETTY_NAME | cut -d'"' -f2 || echo "Linux")
+                    echo "OS:${'$'}{OS}"
                 """.trimIndent().replace("\n", "; ")
                 val result = executeCommand(host, port, username, password, statsScript)
                 val lines = result.output.split(";").map { it.trim() }

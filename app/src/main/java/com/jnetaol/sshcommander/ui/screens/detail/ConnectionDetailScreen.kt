@@ -98,21 +98,23 @@ fun ConnectionDetailScreen(
                     GlowButton(
                         if (isConnected) "Disconnect" else "Connect",
                         if (isConnected) Icons.Default.Close else Icons.Default.PlayArrow,
+                        onClick = {
+                            if (isConnected) viewModel.disconnect()
+                            else viewModel.connectTo(connection)
+                        },
                         glowColor = if (isConnected) SCError else SCSuccess,
                         enabled = !isConnecting,
                         modifier = Modifier.weight(1f)
-                    ) {
-                        if (isConnected) viewModel.disconnect()
-                        else viewModel.connectTo(connection)
-                    }
+                    )
 
                     GlowButton(
                         "Terminal",
                         Icons.Default.Terminal,
+                        onClick = { onOpenTerminal() },
                         glowColor = SCNeonCyan,
                         modifier = Modifier.weight(1f),
                         enabled = isConnected
-                    ) { onOpenTerminal() }
+                    )
                 }
             }
 
@@ -136,9 +138,7 @@ fun ConnectionDetailScreen(
                             Spacer(Modifier.height(8.dp))
                             Text("OS: ${stats.osInfo}", color = SCTextSecondary, fontSize = 12.sp)
                             Spacer(Modifier.height(8.dp))
-                            GlowButton("Refresh Stats", Icons.Default.Refresh, glowColor = SCSecondary) {
-                                viewModel.fetchStats()
-                            }
+                            GlowButton("Refresh Stats", Icons.Default.Refresh, onClick = { viewModel.fetchStats() }, glowColor = SCSecondary)
                         } else {
                             Text("Connect to view live system stats", color = SCTextMuted, fontSize = 14.sp)
                         }
@@ -165,10 +165,10 @@ fun ConnectionDetailScreen(
                             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                                 row.forEach { (label, cmd, icon) ->
                                     GlowButton(
-                                        label, icon, glowColor = SCPrimary,
+                                        label, icon, onClick = { viewModel.executeCommand(cmd) }, glowColor = SCPrimary,
                                         modifier = Modifier.weight(1f),
                                         enabled = connectionState == SSHManager.ConnectionState.CONNECTED
-                                    ) { viewModel.executeCommand(cmd) }
+                                    )
                                 }
                                 if (row.size < 2) Spacer(Modifier.weight(1f))
                             }
@@ -183,7 +183,7 @@ fun ConnectionDetailScreen(
                     Column(Modifier.padding(16.dp)) {
                         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
                             Text("Docker Containers", color = SCNeonCyan, fontSize = 16.sp, fontWeight = FontWeight.Bold)
-                            GlowButton("Refresh", Icons.Default.Refresh, glowColor = SCNeonCyan) { viewModel.fetchDockerContainers() }
+                            GlowButton("Refresh", Icons.Default.Refresh, onClick = { viewModel.fetchDockerContainers() }, glowColor = SCNeonCyan)
                         }
                         Spacer(Modifier.height(8.dp))
                         if (dockerContainers.isEmpty() && connectionState == SSHManager.ConnectionState.CONNECTED) {
@@ -251,9 +251,7 @@ fun EditConnectionDialog(
             }
         },
         confirmButton = {
-            GlowButton("Save", Icons.Default.Save, glowColor = SCPrimary, enabled = name.isNotBlank() && host.isNotBlank()) {
-                onSave(connection.copy(name = name, host = host, port = port.toIntOrNull() ?: 22, username = username, password = password))
-            }
+            GlowButton("Save", Icons.Default.Save, onClick = { onSave(connection.copy(name = name, host = host, port = port.toIntOrNull() ?: 22, username = username, password = password)) }, glowColor = SCPrimary, enabled = name.isNotBlank() && host.isNotBlank())
         },
         dismissButton = { TextButton(onDismiss) { Text("Cancel", color = SCTextMuted) } },
         containerColor = SCSurface
