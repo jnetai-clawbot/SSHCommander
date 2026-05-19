@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SSH Commander</string>
+    <string name="app_tagline">Linux Server Manager</string>
+    <string name="about_made_by">Made By jnetaol.com</string>
+    <string name="about_url">https://jnetaol.com</string>
+    <string name="github_releases_url">https://github.com/jnetaol/SSHCommander/releases</string>
+    <string name="version_label">Version</string>
+    <string name="check_updates">Check For Updates</string>
+    <string name="share_app">Share App</string>
+    <string name="connections">Connections</string>
+    <string name="saved_commands">Saved Commands</string>
+    <string name="quick_connect">Quick Connect</string>
+    <string name="terminal">Terminal</string>
+    <string name="settings">Settings</string>
+    <string name="about">About</string>
+    <string name="add_connection">Add Connection</string>
+    <string name="edit_connection">Edit Connection</string>
+    <string name="delete_connection">Delete Connection</string>
+    <string name="host">Host</string>
+    <string name="port">Port</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="connect">Connect</string>
+    <string name="disconnect">Disconnect</string>
+    <string name="sftp_browser">SFTP Browser</string>
+    <string name="system_stats">System Stats</string>
+    <string name="docker_controls">Docker Controls</string>
+    <string name="no_connections">No saved connections</string>
+    <string name="add_first_connection">Tap + to add your first SSH connection</string>
+    <string name="connection_saved">Connection saved</string>
+    <string name="connection_deleted">Connection deleted</string>
+    <string name="connected_to">Connected to %s</string>
+    <string name="disconnected">Disconnected</string>
+    <string name="connection_failed">Connection failed</string>
+    <string name="command_executed">Command executed</string>
+    <string name="command_saved">Command saved</string>
+    <string name="copy_share_text">Manage Linux servers with SSH Commander - One-tap SSH, system stats, Docker controls, SFTP browser, and terminal tabs.\n\nDownload: %s</string>
+</resources>

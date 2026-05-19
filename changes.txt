@@ -1,0 +1,23 @@
+SSH Commander v1.0.0 - Initial Release
+
+Changes:
+- Created complete SSH Commander Android app project
+- Implemented SSH connection management with Room database
+- Added one-tap SSH connect using sshpass
+- Created saved commands system for quick execution
+- Implemented live system stats monitoring (CPU, memory, disk, load, uptime, processes)
+- Added Docker container controls and listing
+- Built interactive terminal with tabbed interface (Terminal, Commands, Stats)
+- Designed dark Material Design 3 theme with neon glow effects (green/cyan accents)
+- Created debug logging system (DebugLogger) following VoiceMemo pattern with error codes (SC-xxx)
+- Added HomeScreen with connection list, search, quick connect, add dialog
+- Added ConnectionDetailScreen with server details, stats, quick actions, Docker
+- Added TerminalScreen with command input, saved commands list, system stats
+- Added SettingsScreen with About (Made By jnetaol.com), version display, Check For Updates, Share
+- Created GitHub Actions: build-debug.yml (push), build-release.yml (tags/manual)
+- Release APK copied to apk/ folder as SSH-Commander-vX.X.X.apk
+- Keystore alias: sshcommander
+- Project uses Gradle Kotlin DSL, Compose UI, Kotlin 1.9.22, AGP 8.2.2
+- MinSdk 29, TargetSdk 34, compileSdk 34, ARM64 only
+- Added adaptive icon, proper strings/themes/colors XML resources
+- Added README.md, LICENSE, CHANGELOG.md
