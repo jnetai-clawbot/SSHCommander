@@ -176,9 +176,9 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
 
     fun showToast(msg: String) { scope.launch { _toastMessage.emit(msg) } }
 
-    val appVersion: String get() = "1.0.1"
+    val appVersion: String get() = "1.0.2"
 
-    val githubReleasesUrl: String get() = "https://github.com/jnetaol/SSHCommander/releases"
+    val githubReleasesUrl: String get() = "https://github.com/jnetai-clawbot/SSHCommander/releases"
 
     val aboutUrl: String get() = "https://jnetai.com"
 
