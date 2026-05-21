@@ -2,8 +2,8 @@
 <resources>
     <string name="app_name">SSH Commander</string>
     <string name="app_tagline">Linux Server Manager</string>
-    <string name="about_made_by">Made By jnetaol.com</string>
-    <string name="about_url">https://jnetaol.com</string>
+    <string name="about_made_by">Made By jnetai.com</string>
+    <string name="about_url">https://jnetai.com</string>
     <string name="github_releases_url">https://github.com/jnetaol/SSHCommander/releases</string>
     <string name="version_label">Version</string>
     <string name="check_updates">Check For Updates</string>

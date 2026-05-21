@@ -176,11 +176,11 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
 
     fun showToast(msg: String) { scope.launch { _toastMessage.emit(msg) } }
 
-    val appVersion: String get() = "1.0.0"
+    val appVersion: String get() = "1.0.1"
 
     val githubReleasesUrl: String get() = "https://github.com/jnetaol/SSHCommander/releases"
 
-    val aboutUrl: String get() = "https://jnetaol.com"
+    val aboutUrl: String get() = "https://jnetai.com"
 
     val shareText: String get() = "Manage Linux servers with SSH Commander - One-tap SSH, system stats, Docker controls, SFTP browser, and terminal tabs.\n\nDownload: $githubReleasesUrl"
 
